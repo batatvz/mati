@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matilda - Mis 15 Años</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Outfit:wght@300;500;700&family=Paytone+One&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Manual Zoom Logic Restored -->
+</head>
+
+<body>
+
+    <!-- HEADER SECTION -->
+    <header class="main-header">
+        <div class="header-wrapper">
+            <!-- 1. Background -->
+            <img src="header_sky.png" class="sky-bg" alt="Cielo">
+
+            <!-- 2. Titles (Top) -->
+            <div class="title-group">
+                <p class="subtitle-top">Mis quince años</p>
+                <h1 class="main-title">Matilda</h1>
+            </div>
+
+            <!-- 3. Wheel (Center-Bottom of Header) -->
+            <!-- The visual model shows the wheel taking up most of the space below title -->
+            <div class="wheel-layer">
+                <img src="ruletaintro.png" class="wheel-img" alt="Vuelta al Mundo">
+            </div>
+
+            <!-- 4. Countdown (Centered on/over wheel) -->
+            <!-- 4. Countdown (Centered on/over wheel) -->
+            <div class="countdown-overlay">
+                <!-- Chevron/Arrow decoration often seen? Keeping it simple -->
+                <div class="countdown-box">
+                    <div class="time-unit">
+                        <span id="days">00</span>
+                        <span class="label">Días</span>
+                    </div>
+                    <span class="sep">:</span>
+                    <div class="time-unit">
+                        <span id="hours">00</span>
+                        <span class="label">Hs</span>
+                    </div>
+                    <span class="sep">:</span>
+                    <div class="time-unit">
+                        <span id="minutes">00</span>
+                        <span class="label">Min</span>
+                    </div>
+                    <span class="sep">:</span>
+                    <div class="time-unit">
+                        <span id="seconds">00</span>
+                        <span class="label">Seg</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT SECTIONS -->
+
+    <!-- 1. INVITE (Green) -->
+    <section class="content-section bg-green">
+        <div class="container">
+            <img src="iconos/1.png" class="section-icon" alt="Icon">
+            <h2>Ven a celebrar junto a mi!</h2>
+            <p class="section-text text-cream">
+                Este año no hay salón ni vestidos largos… ¡hay parque de diversiones!
+                Te invito a pasar una tarde conmigo llena de risas, juegos y muchas atracciones.
+            </p>
+        </div>
+    </section>
+
+    <!-- 2. DATE (Orange) -->
+    <section class="content-section bg-orange">
+        <div class="container">
+            <img src="iconos/8.png" class="section-icon" alt="Calendar">
+            <h2>Agendá la fecha</h2>
+            <p class="section-text text-white">Sábado 10 de Enero 2026<br>De 11:00 a 18:00 hs.</p>
+            <button class="action-btn btn-dark" onclick="addToCalendar()">Agendar</button>
+        </div>
+    </section>
+
+    <!-- 3. ATTRACTIONS (Cream) -->
+    <section class="content-section bg-cream">
+        <div class="container">
+            <img src="iconos/7.png" class="section-icon" alt="Wheel">
+            <h2 class="text-orange">Atracciones</h2>
+            <p class="section-text text-green">¡Aca podras ver las atracciones y el mapa del parque!</p>
+            <div class="btn-group">
+                <!-- 4.1 CENTER BUTTON (Logo) -->
+                <!-- 4.1 CENTER BUTTON (Logo) -->
+                <a href="https://www.parquedelacosta.com.ar/atracciones/" target="_blank"
+                    class="action-btn-circle center-btn">
+                    <img src="Logo naranja.png" alt="Ver Atracciones">
+                </a>
+                <!-- Changed to mapModal -->
+                <button class="action-btn btn-orange" data-modal="mapModal">Mapa del parque</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PREMIUM PASSPORT (Green) -->
+    <section class="content-section bg-green">
+        <div class="container">
+            <img src="iconos/5.png" class="section-icon" alt="Ticket">
+            <h2>Pasaporte Premium</h2>
+            <p class="section-text text-cream">Todos tendremos un pasaporte de festejo premium</p>
+            <!-- Changed target to passportModal -->
+            <button class="action-btn btn-orange" data-modal="passportModal">¿Qué incluye?</button>
+        </div>
+    </section>
+
+    <!-- 5. DRESS CODE (Orange) -->
+    <section class="content-section bg-orange">
+        <div class="container">
+            <img src="iconos/6.png" class="section-icon" alt="Dress">
+            <h2>Vestimenta</h2>
+            <p class="section-text text-white">Trae ropa cómoda y energía<br>para subirte a todo!</p>
+        </div>
+    </section>
+
+    <!-- DECORATION: Coaster Loop -->
+    <div class="coaster-divider">
+        <img src="decor_coaster.png" class="coaster-img" alt="Montaña Rusa">
+    </div>
+
+    <!-- 6. LOCATION (Cream) -->
+    <section class="content-section bg-cream">
+        <div class="container">
+            <img src="iconos/4.png" class="section-icon" alt="Location">
+            <h2 class="text-orange">¿Cómo llegar?</h2>
+            <p class="section-text text-green">Toca en el mapa para guiarte</p>
+            <!-- Changed to modal -->
+            <button class="action-btn btn-orange" data-modal="locationModal">Ver Ubicación</button>
+        </div>
+    </section>
+
+    <!-- 7. GALLERY (Green) -->
+    <section class="content-section bg-green">
+        <div class="container">
+            <img src="iconos/3.png" class="section-icon" alt="Camera">
+            <h2>Álbum de Fotos</h2>
+            <p class="section-text text-cream">¡Momentos junto a ustedes!</p>
+
+            <div class="carousel-wrapper">
+                <!-- Buttons removed as Marquee is continuous. Pause on hover. -->
+                <div class="carousel-track-container">
+                    <ul class="carousel-track"></ul>
+                </div>
+            </div>
+            <!-- Fast Forward Button -->
+            <div style="text-align: center; margin-top: 10px;">
+                <button class="action-btn btn-orange" onclick="toggleFastForward(this)"
+                    style="padding: 10px 20px; font-size: 1rem;">
+                    Adelantar &raquo;
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. GIFT (Orange) -->
+    <section class="content-section bg-orange">
+        <div class="container">
+            <img src="iconos/8.png" class="section-icon" alt="Gift">
+            <h2>Regalo</h2>
+            <p class="section-text text-white">Tu presencia es lo más importante.<br>Si además queres hacerme un regalo
+                te cuento como hacerlo.</p>
+            <button class="action-btn btn-dark" data-modal="giftModal">Más Información</button>
+        </div>
+    </section>
+
+    <!-- 9. RSVP (Cream) -->
+    <section class="content-section bg-cream">
+        <div class="container">
+            <img src="iconos/2.png" class="section-icon" alt="RSVP">
+            <h2 class="text-orange">Confirmación de Asistencia</h2>
+            <p class="section-text text-green">Me encantaría contar con tu presencia.<br>Por favor confirmá antes del 2
+                de Enero 2026</p>
+            <!-- Changed to modal -->
+            <button class="action-btn btn-orange" data-modal="rsvpModal">Confirmar asistencia</button>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <!-- New Gift Modal -->
+    <!-- Duplicate Modal Removed -->
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modal-img" src="" alt="Info">
+        </div>
+    </div>
+
+    <!-- New Passport Text Modal -->
+    <div id="passportModal" class="modal">
+        <div class="modal-content passport-card">
+            <span class="close">&times;</span>
+            <div class="passport-text">
+                <h3>Pasaporte de festejo premium con acceso a:</h3>
+                <ul>
+                    <li>Todas las atracciones del pasaporte full</li>
+                    <li>Todos los shows en vivo</li>
+                    <li>Pase rápido Yoni y Braulio (6 atracciones cada uno)</li>
+                    <li>Un coordinador que nos acompañará durante 7 horas</li>
+                    <li>También tendremos almuerzo y merienda en el salón de festejos.</li>
+                </ul>
+            </div>
+            <img src="montañarusa.png" class="passport-decor" alt="Coaster">
+        </div>
+    </div>
+
+    <!-- New Location Modal -->
+    <div id="locationModal" class="modal">
+        <div class="modal-content location-card">
+            <span class="close">&times;</span>
+            <div class="location-layout">
+                <div class="location-text">
+                    <p>Vivanco 1509,<br>B1648AAB Tigre,<br>Provincia de Buenos Aires</p>
+                </div>
+                <!-- Google Maps Embed -->
+                <div class="location-map">
+                    <iframe width="100%" height="300" frameborder="0" style="border:0"
+                        src="https://maps.google.com/maps?cid=5750665988237591520&output=embed" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Gift Modal -->
+    <div id="giftModal" class="modal">
+        <div class="modal-content gift-card">
+            <span class="close">&times;</span>
+            <div class="gift-content">
+                <h3>Mercado Pago</h3>
+                <div class="bank-details">
+                    <p><strong>Mail:</strong> adlitam.arodisi@gmail.com</p>
+                    <p><strong>CUIL:</strong> 27-95910545-1</p>
+                    <p><strong>Alias:</strong> matilda.miau.mp</p>
+                    <p><strong>CVU:</strong> 0000003100040321288192</p>
+                </div>
+
+                <button class="copy-btn"
+                    onclick="navigator.clipboard.writeText('0000003100040321288192').then(() => alert('CVU Copiado!'))">
+                    <!-- Simple icon SVG or just text -->
+                    <span style="font-size: 1.2rem; margin-right: 8px;">📋</span> Copiar CVU
+                </button>
+
+                <div class="gift-divider"></div>
+
+                <p class="gift-footer">*En caso que prefieras llevar un regalo, podés dármelo ese mismo día!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- New RSVP Modal -->
+    <div id="rsvpModal" class="modal">
+        <div class="modal-content rsvp-card">
+            <span class="close">&times;</span>
+            <div class="rsvp-content">
+                <h3>Confirmar Asistencia</h3>
+                <!-- Real Action URL -->
+                <form id="rsvpFormModal"
+                    action="https://docs.google.com/forms/d/e/1FAIpQLSdqnLazVuqpf2wgmVuxo3SCxUAf6OTDWS6JB9TW0CDrsGecMw/formResponse"
+                    method="POST" target="hidden_iframe"
+                    onsubmit="this.style.display='none'; document.getElementById('rsvp-thank-you').style.display='block';">
+
+                    <div class="form-group">
+                        <label for="name">Nombre Completo:</label>
+                        <!-- Real Name ID -->
+                        <input type="text" id="name" name="entry.1260769672" required
+                            placeholder="Tu nombre y apellido">
+                    </div>
+
+                    <div class="form-group">
+                        <label>¿Asistís?</label>
+                        <div class="radio-group">
+                            <label>
+                                <!-- Real Attendance ID -->
+                                <input type="radio" name="entry.2068629308" value="Si" required> ¡Sí, voy!
+                            </label>
+                            <label>
+                                <input type="radio" name="entry.2068629308" value="No"> No puedo :(
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Enviar Confirmación</button>
+                </form>
+
+                <div id="rsvp-thank-you" style="display:none; text-align: center;">
+                    <h3>¡Gracias!</h3>
+                    <p>Tu respuesta fue enviada.</p>
+                </div>
+
+                <!-- Hidden Iframe for silent submission -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Map Modal -->
+    <div id="mapModal" class="modal">
+        <div class="modal-content map-card">
+            <span class="close">&times;</span>
+            <!-- Map Viewport -->
+            <div class="map-viewport">
+                <img src="Mapa del Parque-1.png" id="zoom-map" alt="Mapa del Parque">
+            </div>
+            <!-- Download Button (Visible when NOT zoomed) -->
+            <a id="download-map-btn" href="Mapa del Parque-1.png" download="Mapa_Fiestita.png" target="_blank"
+                class="action-btn btn-orange" style="position: absolute; bottom: 20px; z-index: 100;">
+                Descargar Mapa
+            </a>
+        </div>
+    </div>
+
+    <!-- FINAL SECTION - Michis -->
+    <section class="final-section">
+        <!-- Just the background image, no content -->
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="modal lightbox-modal" onclick="closeLightbox(event)">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

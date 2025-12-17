@@ -1,0 +1,1414 @@
+/* Global Vars */
+:root {
+    --green: #064439;
+    --orange: #f27825;
+    --cream: #fdf8e2;
+    --text-green: #064439;
+    --text-cream: #fdf8e2;
+    --text-white: #ffffff;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+/* Custom Font - Iro Sans (Hero Sans alternative) */
+@font-face {
+    font-family: 'Iro Sans';
+    src: url('fonnts.com-Iro_Sans_Display_Heavy.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Calibri', 'Segoe UI', Tahoma, sans-serif;
+    overflow-x: hidden;
+    background-color: var(--green);
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-family: 'Iro Sans', 'Arial Black', sans-serif;
+    margin: 0 0 15px 0;
+    letter-spacing: 1px;
+    text-transform: none;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+h1.main-title {
+    font-size: 5.5rem;
+    /* Larger */
+    color: var(--orange);
+    line-height: 1;
+    margin: 10px 0;
+}
+
+h2 {
+    font-size: 2.2rem;
+}
+
+p.section-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 650px;
+    margin: 0 auto 25px auto;
+    font-weight: 500;
+}
+
+.text-white {
+    color: var(--text-white);
+}
+
+.text-cream {
+    color: var(--text-cream);
+}
+
+.text-green {
+    color: var(--text-green);
+}
+
+.text-orange {
+    color: var(--orange);
+}
+
+/* Buttons */
+.action-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-transform: uppercase;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+    margin: 5px;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.action-btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+.btn-dark {
+    background-color: var(--green);
+    color: #fff;
+}
+
+.btn-orange {
+    background-color: var(--orange);
+    color: #fff;
+}
+
+
+/* HEADER STYLE (Strict Positioning) */
+.main-header {
+    position: relative;
+    width: 100%;
+    height: 750px;
+    /* Force height to frame the composition */
+    overflow: hidden;
+    text-align: center;
+    background-color: #87CEEB;
+}
+
+.header-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.sky-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* 1. TITLE GROUP (Top) */
+.title-group {
+    position: absolute;
+    top: 50px;
+    /* Near top */
+    width: 100%;
+    z-index: 20;
+    /* On top of everything */
+    text-align: center;
+}
+
+.subtitle-top {
+    font-family: 'Calibri', sans-serif;
+    font-size: 1.8rem;
+    color: #064439;
+    /* Dark Green to contrast with sky? Or white? Model seems dark. */
+    margin: 0;
+    text-transform: none;
+    font-weight: 600;
+}
+
+/* 2. WHEEL (Middle/Back) - MOVED TO BOTTOM */
+.wheel-layer {
+    position: absolute;
+    /* Move to bottom of header section */
+    top: auto;
+    bottom: -475px;
+    /* Half of 950px approx */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 950px;
+    /* Much Bigger */
+    height: 950px;
+    z-index: 5;
+}
+
+.wheel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Animation removed */
+}
+
+@keyframes spinSlow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 3. COUNTDOWN (Centered in Wheel hub) */
+.countdown-overlay {
+    position: absolute;
+    /* Adjusted bottom to align with the center of the now larger half-hidden wheel */
+    bottom: -60px;
+    /* Sitting slightly lower to match the hub visual */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    width: auto;
+    pointer-events: auto;
+}
+
+.countdown-box {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    /* More space between numbers */
+    color: #444;
+    font-family: 'Paytone One', sans-serif;
+    /* Restored Background "Orrendo" */
+    background: #fdf8e2;
+    padding: 30px;
+    border-radius: 50%;
+    width: 250px;
+    /* Keep size readable */
+    height: 250px;
+    align-items: center;
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.5);
+    border: 5px solid #fff;
+    /* Extra border */
+}
+
+/* Adjust countdown for circular layout */
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Optional text shadow to read better over wheel parts */
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.time-unit span:first-child {
+    font-size: 2.5rem;
+    /* Bigger numbers */
+    color: var(--orange);
+    line-height: 1;
+}
+
+.time-unit .label {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: #064439;
+    /* Darker label for contrast */
+}
+
+.sep {
+    font-size: 2.5rem;
+    margin-top: -5px;
+    color: var(--green);
+    text-shadow: none;
+}
+
+
+/* SECTION STYLES */
+.content-section {
+    width: 100%;
+    padding: 80px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    /* Ensure z-index is higher than header bottom edge if overlap */
+    z-index: 10;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+}
+
+.bg-green {
+    background-color: var(--green);
+    color: var(--text-cream);
+}
+
+.bg-orange {
+    background-color: var(--orange);
+    color: var(--text-white);
+}
+
+.bg-cream {
+    background-color: var(--cream);
+    color: var(--text-green);
+}
+
+.section-icon {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+
+/* COASTER DIVIDER */
+.coaster-divider {
+    height: 0;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+}
+
+.coaster-img {
+    position: relative;
+    top: -150px;
+    width: 100%;
+    max-width: 1000px;
+    pointer-events: none;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
+}
+
+
+/* CAROUSEL (Smooth Marquee SCROLL) */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    /* Fullish width */
+    height: 300px;
+    /* Drastically reduced from 500px to 300px */
+    margin: 0 auto;
+    /* Removed background box for cleaner look */
+    background: transparent;
+    padding: 20px 0;
+    /* Vertical padding */
+    overflow: hidden;
+    /* Hide overflow */
+}
+
+/* Remove JS controls CSS, use standard marquee */
+.carousel-nav {
+    display: none;
+}
+
+/* Hide buttons */
+
+.carousel-track-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Removed border radius on container to let images stand out */
+}
+
+.carousel-track {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    width: max-content;
+    /* Allow track to be as long as needed */
+    height: 100%;
+    /* Infinite Marquee Animation */
+    animation: scrollMarquee 80s linear infinite;
+    /* Much Slower (was 40s) */
+}
+
+/* Pause on Hover/Touch */
+.carousel-track:hover,
+.carousel-track:active {
+    animation-play-state: paused;
+}
+
+@keyframes scrollMarquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* Assumes visual doubling of content via JS or enough overlap */
+}
+
+.carousel-slide {
+    width: auto;
+    /* Allow width to be flexible based on image */
+    height: 100%;
+    padding: 0 15px;
+    /* Increased gap */
+    box-sizing: border-box;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    /* Centers image vertically */
+}
+
+.carousel-slide img {
+    width: auto;
+    /* Maintain aspect ratio */
+    height: 85%;
+    /* Reduced from 100% to leave room for shadow/border */
+    max-width: none;
+    /* Ensure full image visibility */
+    object-fit: contain;
+    border-radius: 10px;
+    /* Less rounded */
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    /* Now fits in the 15% space */
+}
+
+.prev {
+    left: -25px;
+    color: var(--orange);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.prev {
+    left: -25px;
+}
+
+.next {
+    right: -25px;
+}
+
+.map-viewport {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Enable scrolling */
+    display: block;
+    /* FIX: Flex was constraining the image size. Block allows overflow. */
+    text-align: center;
+    /* Center the image initially */
+    background-color: #fdf8e2;
+    /* Cream bg for map gaps */
+    position: relative;
+    /* Context */
+}
+
+.map-viewport img {
+    /* DEFAULT STATE: Fit to screen initially? Or big? */
+    /* Let's start with width: 100% to fit, then user zooms in */
+    width: 100%;
+    height: auto;
+    display: block;
+    /* No whitespace issues */
+    margin: 0 auto;
+    max-width: none !important;
+    /* CRITICAL: Allow it to exceed container */
+    max-height: none !important;
+    /* FIX: Prevent "stretching" by removing height cap */
+    /* Transition removed to prevent "stretching" effect during scroll adjust */
+    border: none;
+    box-shadow: none;
+    transform-origin: top left;
+    /* Zoom logic anchor */
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: transparent;
+    padding: 0;
+    max-width: 90%;
+    position: relative;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 15px;
+    border: 5px solid #fff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    background: var(--orange);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    font-size: 3.5rem;
+}
+
+/* GLOBAL UTILITIES - Stack Buttons Vertically (Ref: User request "ponelo sobre el boton") */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+/* 1. HERO SECTION: Clean Flex Column */
+/* 1. HERO SECTION: Clean Flex Column */
+@media screen and (max-width: 768px) {
+    .header-wrapper {
+        min-height: 100vh;
+        height: auto !important;
+        /* Allow growing! Fixes clipped countdown */
+        /* Force strict height */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        /* Even spacing is key */
+        align-items: center;
+        padding: 40px 0;
+        overflow: visible !important;
+        /* Don't hide the countdown! */
+    }
+
+    /* Reset Absolute Positions */
+    /* ABSOLUTE POSITIONING STRATEGY (The "Mannequin" Approach) */
+    /* If flex/grid fails to render, we place them by hand coordinates */
+
+    .header-wrapper {
+        min-height: 100vh;
+        height: 100vh !important;
+        /* Force full viewport */
+        display: block !important;
+        /* No flex/grid flow */
+        position: relative !important;
+        overflow: hidden !important;
+        overflow-x: hidden !important;
+        padding: 0 !important;
+    }
+
+    .title-group {
+        position: absolute !important;
+        top: 20px;
+        /* Reduced from 40px */
+        left: 0;
+        width: 100%;
+        margin: 0 !important;
+        z-index: 10;
+        text-align: center;
+    }
+
+    .wheel-layer {
+        position: absolute !important;
+        /* Moved up to reduce empty space */
+        bottom: 0vh !important;
+        left: 50%;
+        transform: translateX(-50%);
+
+        /* Reduced from 130% to prevent overflow */
+        width: 120% !important;
+        max-width: 700px !important;
+        height: auto;
+
+        display: flex;
+        justify-content: center;
+        margin: 0 !important;
+        z-index: 1;
+    }
+
+    .wheel-layer img {
+        width: 100% !important;
+        height: auto;
+    }
+
+    .countdown-overlay {
+        position: absolute !important;
+        /* Better centered on wheel across different screens */
+        bottom: 25vh !important;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 100 !important;
+
+        /* Keep GPU Fix */
+        transform: translateZ(0);
+        will-change: transform;
+    }
+
+    .countdown-box {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        /* Allow wrapping if needed */
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.3vw !important;
+
+        /* REDUCED SIZE to be proportional to wheel */
+        width: 35vw !important;
+        height: 35vw !important;
+        border-radius: 50% !important;
+        padding: 1vw !important;
+
+        background: var(--cream) !important;
+        border: 0.6vw solid #fff !important;
+        /* Thinner border */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+        backdrop-filter: none !important;
+    }
+
+    .time-unit {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .time-unit span:first-child {
+        font-size: 4.2vw !important;
+        color: var(--orange) !important;
+        text-shadow: none !important;
+        font-weight: 800;
+        line-height: 1;
+    }
+
+    .time-unit .label {
+        color: var(--text-green) !important;
+        text-shadow: none !important;
+        font-weight: 700;
+        font-size: 1.5vw !important;
+        display: block;
+        text-transform: uppercase;
+        margin-top: 0.3vw;
+    }
+
+    .sep {
+        font-size: 3.8vw !important;
+        color: var(--text-green) !important;
+        text-shadow: none !important;
+        margin: 0 0.3vw;
+        padding-bottom: 1.8vw;
+        line-height: 1;
+    }
+
+    /* 2. GALLERY FIX: Force Margin on LI items */
+    .carousel-track li.carousel-slide {
+        min-width: auto;
+        width: 250px;
+        margin-right: 50px !important;
+        /* FORCE MARGIN */
+    }
+
+    .carousel-track {
+        display: flex !important;
+        gap: 0 !important;
+        /* Disable gap if using margin */
+    }
+
+    .prev,
+    .next {
+        display: none;
+    }
+
+    /* 3. MAP FIX: FORCE FULL SIZE NO WHITESPACE */
+    .map-card {
+        width: 98% !important;
+        height: 60vh !important;
+        padding: 0 !important;
+        border-radius: 15px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: #000 !important;
+        /* Debug: Black bg to see if image covers */
+        overflow: hidden !important;
+    }
+
+    .map-viewport {
+        flex: 1 !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        overflow: hidden !important;
+        background: #333 !important;
+    }
+
+    .map-viewport img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        /* FORCE COVER */
+        object-position: center !important;
+        max-width: none !important;
+        max-height: none !important;
+    }
+}
+
+/* This is the extra brace that needs to be removed */
+
+/* LOGO BUTTON RESTORATION (Standard) */
+/* LOGO BUTTON RESTORATION (Standard) */
+.center-btn {
+    margin: 5px 0;
+    /* Vertical margin preferred for stack? Or just rely on gap */
+}
+
+/* Standard Size for all circle buttons */
+.action-btn-circle img {
+    height: 55px;
+    /* Standard size */
+    width: auto;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    display: block;
+}
+
+.action-btn-circle:hover img {
+    transform: scale(1.05);
+}
+
+.action-btn-circle:active img {
+    transform: scale(0.95);
+}
+
+/* RESTORING MISSING MODAL STYLES */
+.location-card {
+    /* Reverted to plain cream color per user request */
+    background-color: var(--cream);
+    color: var(--orange);
+    padding: 25px;
+    /* Compact padding */
+    border-radius: 40px;
+    max-width: 700px;
+    /* Reduced width */
+    width: 90%;
+    position: relative;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    /* Removed min-height to fit content */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    /* For image crop if needed */
+    align-items: center;
+}
+
+.location-layout {
+    display: flex;
+    align-items: flex-end;
+    /* Align text to bottom */
+    gap: 20px;
+    /* Reduced gap */
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+/* PASSPORT MODAL CARD */
+.passport-card {
+    background-color: var(--orange);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    text-align: left;
+    /* Text aligns left per ref */
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    /* For image crop if needed */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.passport-text {
+    flex: 1;
+    z-index: 2;
+    /* Text over image if overlap */
+    position: relative;
+}
+
+.passport-text h3 {
+    font-family: 'Fredoka', sans-serif;
+    /* Friendly bold font */
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.passport-text ul {
+    list-style: none;
+    /* Custom bullets or none */
+    padding: 0;
+    margin: 0;
+}
+
+.passport-text ul li {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    position: relative;
+    line-height: 1.4;
+}
+
+/* Bullet decoration */
+.passport-text ul li::before {
+    content: '•';
+    /* Simple bullet */
+    position: absolute;
+    left: 0;
+    color: #e58d4a;
+    /* Slightly softer orange often seen in refs? Or stick to var(--orange) */
+    color: var(--orange);
+}
+
+.location-map {
+    flex: 1.5;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 300px;
+    /* Fixed height for map block */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 5px;
+    /* White border effect like a polaroid? Optional */
+}
+
+.location-card .close {
+    color: var(--orange);
+    background: transparent;
+    top: 20px;
+    right: 30px;
+    font-size: 50px;
+    /* Bigger X */
+}
+
+@media screen and (max-width: 768px) {
+    .location-card {
+        padding: 30px;
+        border-radius: 30px;
+    }
+
+    .location-layout {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .location-text {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.3rem;
+        width: 100%;
+    }
+
+    .location-map {
+        width: 100%;
+        height: 250px;
+    }
+}
+
+/* PASSPORT DECOR (Was orphaned before) */
+.passport-decor {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+    margin-left: 20px;
+    transform: rotate(-10deg);
+}
+
+/* PASSPORT CLOSE OVERRIDE */
+.passport-card .close {
+    background: transparent;
+    color: white;
+    top: 20px;
+    right: 30px;
+    font-size: 50px;
+    font-weight: 300;
+}
+
+/* Lightbox Modal Specifics */
+.lightbox-modal {
+    background-color: rgba(0, 0, 0, 0.95);
+    /* Darker overlay */
+    z-index: 9999;
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Fast Forward Animation handled via JS (updatePlaybackRate) */
+
+@media screen and (max-width: 768px) {
+    .passport-decor {
+        display: none;
+    }
+
+    .passport-text ul li {
+        font-size: 1rem;
+    }
+}
+
+
+/* LOGO BUTTON (Re-verified) */
+.logo-btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logo-btn img {
+    height: 55px;
+    width: auto;
+    transition: transform 0.2s;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.logo-btn:hover img {
+    transform: scale(1.1);
+}
+
+.logo-btn:active img {
+    transform: scale(0.95);
+}
+
+/* Standard Size for all circle buttons */
+.action-btn-circle img {
+    height: 55px !important;
+    /* Force standard size */
+    width: auto;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    display: block;
+}
+
+.action-btn-circle:hover img {
+    transform: scale(1.05);
+}
+
+.action-btn-circle:active img {
+    transform: scale(0.95);
+}
+
+/* RESTORING MISSING MODAL STYLES */
+.location-card {
+    background-color: var(--cream);
+    color: var(--orange);
+    padding: 25px;
+    border-radius: 40px;
+    max-width: 700px;
+    width: 90%;
+    position: relative;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    align-items: center;
+}
+
+.location-layout {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.location-text {
+    text-align: left;
+}
+
+.location-map {
+    flex: 1.5;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    padding: 5px;
+}
+
+.location-card .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--orange);
+    /* Visible Circle */
+    color: white;
+    /* Visible X */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 50;
+    cursor: pointer;
+}
+
+/* PASSPORT MODAL CARD (Restored) */
+.passport-card {
+    background-color: var(--orange);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    text-align: left;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.passport-text {
+    flex: 1;
+    z-index: 2;
+    position: relative;
+}
+
+.passport-text h3 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.passport-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.passport-text ul li {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.passport-text ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--cream);
+}
+
+.passport-decor {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+    margin-left: 20px;
+    transform: rotate(-10deg);
+}
+
+.passport-card .close {
+    background: transparent;
+    color: white;
+    top: 20px;
+    right: 30px;
+    font-size: 50px;
+    font-weight: 300;
+    position: absolute;
+}
+
+/* GIFT MODAL CARD (Restored) */
+.gift-card {
+    background-color: var(--orange);
+    color: white;
+    padding: 40px;
+    border-radius: 30px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+.gift-content h3 {
+    font-family: 'Fredoka', cursive;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.bank-details p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.copy-btn {
+    background-color: #064e3b;
+    /* Dark Green */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.copy-btn:hover {
+    transform: scale(1.05);
+    background-color: #022c22;
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.gift-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 25px 0;
+    width: 100%;
+}
+
+/* RSVP MODAL CARD */
+.rsvp-card {
+    background-color: var(--cream);
+    color: var(--green);
+    padding: 40px;
+    border-radius: 30px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+.rsvp-content h3 {
+    font-family: 'Fredoka', cursive;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--orange);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* Important for padding */
+}
+
+.form-group input[type="text"]:focus {
+    border-color: var(--orange);
+    outline: none;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+.radio-group label {
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: var(--orange);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s;
+}
+
+.submit-btn:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+/* Close button color for rsvp (cream bg needs dark X) */
+/* Close button color for rsvp (cream bg needs dark X) */
+.rsvp-card .close {
+    position: absolute;
+    /* FIX: Was likely missing or overridden */
+    background-color: var(--orange);
+    /* The user sees a circle, so let's ensure it's intended */
+    color: #ffffff;
+    /* FIX: White text against Orange background */
+    right: 20px;
+    top: 15px;
+    z-index: 10;
+    /* Ensure it's on top */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    /* On top of zoom controls/map */
+    font-size: 24px;
+    opacity: 0.9;
+}
+
+/* Close button override for map card (needs to be visible on map) */
+.map-card .close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: var(--orange);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    font-size: 24px;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+/* MAP CARD SPECIFIC FIX */
+.map-card {
+    width: 90%;
+    height: 85vh;
+    /* Fixed height for scrolling */
+    max-width: 1200px;
+    background: #fdf8e2;
+    /* Cream bg */
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center download button horizontally */
+    position: relative;
+    /* Ensure padding doesn't kill calc */
+    padding: 0;
+}
+
+.map-viewport {
+    width: 100%;
+    /* Flex magic for scrolling area */
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    /* Enable native scrolling */
+    display: block;
+    text-align: center;
+    position: relative;
+    /* Smooth scroll behavior */
+    scroll-behavior: auto;
+    /* Manual drag needs auto, not smooth */
+}
+
+.map-viewport img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-width: none !important;
+    max-height: none !important;
+    /* Critical for vertical scrolling */
+    border: none;
+    transform-origin: top left;
+}
+
+/* Close button override for gift card */
+.gift-card .close {
+    background: transparent;
+    color: white;
+    top: 15px;
+    right: 20px;
+    font-size: 40px;
+    font-weight: 300;
+}
+
+/* Final Section - Michis */
+.final-section {
+    width: 100%;
+    min-height: 500px;
+    padding: 80px 20px;
+    background-image: url('michis.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    .final-section {
+        padding: 60px 20px;
+        min-height: 400px;
+        background-size: cover;
+    }
+}
+
+/* End of styles */
+/* Close button override for gift card */
+.gift-card .close {
+    background: transparent;
+    color: white;
+    top: 15px;
+    right: 20px;
+    font-size: 40px;
+    font-weight: 300;
+}

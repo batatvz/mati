@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes - Fiestita</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            color: #555;
+            margin-top: 40px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 10px 0;
+        }
+        .image-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .image-container {
+            height: 200px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eee;
+            overflow: hidden;
+        }
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+        .image-name {
+            padding: 10px;
+            font-size: 0.9em;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+        }
+        /* Modal for full size view */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Galería de Imágenes del Proyecto</h1>
+
+    <h2>Directorio Principal</h2>
+    <div class="gallery-grid">
+        <div class="image-card" onclick="openModal('Modelo-01.jpg')">
+            <div class="image-container"><img src="Modelo-01.jpg" alt="Modelo-01.jpg" loading="lazy"></div>
+            <div class="image-name">Modelo-01.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('emergentes-03.jpg')">
+            <div class="image-container"><img src="emergentes-03.jpg" alt="emergentes-03.jpg" loading="lazy"></div>
+            <div class="image-name">emergentes-03.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('emergentes-04.jpg')">
+            <div class="image-container"><img src="emergentes-04.jpg" alt="emergentes-04.jpg" loading="lazy"></div>
+            <div class="image-name">emergentes-04.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('emergentes-05.jpg')">
+            <div class="image-container"><img src="emergentes-05.jpg" alt="emergentes-05.jpg" loading="lazy"></div>
+            <div class="image-name">emergentes-05.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('fondo-03-03.png')">
+            <div class="image-container"><img src="fondo-03-03.png" alt="fondo-03-03.png" loading="lazy"></div>
+            <div class="image-name">fondo-03-03.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('montañarusa.png')">
+            <div class="image-container"><img src="montañarusa.png" alt="montañarusa.png" loading="lazy"></div>
+            <div class="image-name">montañarusa.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('nubes.png')">
+            <div class="image-container"><img src="nubes.png" alt="nubes.png" loading="lazy"></div>
+            <div class="image-name">nubes.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('ruletaintro.png')">
+            <div class="image-container"><img src="ruletaintro.png" alt="ruletaintro.png" loading="lazy"></div>
+            <div class="image-name">ruletaintro.png</div>
+        </div>
+    </div>
+
+    <h2>iconos/</h2>
+    <div class="gallery-grid">
+        <div class="image-card" onclick="openModal('iconos/1.png')">
+            <div class="image-container"><img src="iconos/1.png" alt="1.png" loading="lazy"></div>
+            <div class="image-name">1.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/2.png')">
+            <div class="image-container"><img src="iconos/2.png" alt="2.png" loading="lazy"></div>
+            <div class="image-name">2.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/3.png')">
+            <div class="image-container"><img src="iconos/3.png" alt="3.png" loading="lazy"></div>
+            <div class="image-name">3.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/4.png')">
+            <div class="image-container"><img src="iconos/4.png" alt="4.png" loading="lazy"></div>
+            <div class="image-name">4.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/5.png')">
+            <div class="image-container"><img src="iconos/5.png" alt="5.png" loading="lazy"></div>
+            <div class="image-name">5.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/6.png')">
+            <div class="image-container"><img src="iconos/6.png" alt="6.png" loading="lazy"></div>
+            <div class="image-name">6.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/7.png')">
+            <div class="image-container"><img src="iconos/7.png" alt="7.png" loading="lazy"></div>
+            <div class="image-name">7.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/8.png')">
+            <div class="image-container"><img src="iconos/8.png" alt="8.png" loading="lazy"></div>
+            <div class="image-name">8.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/9.png')">
+            <div class="image-container"><img src="iconos/9.png" alt="9.png" loading="lazy"></div>
+            <div class="image-name">9.png</div>
+        </div>
+        <div class="image-card" onclick="openModal('iconos/10.png')">
+            <div class="image-container"><img src="iconos/10.png" alt="10.png" loading="lazy"></div>
+            <div class="image-name">10.png</div>
+        </div>
+    </div>
+
+    <h2>Fotos/</h2>
+    <div class="gallery-grid">
+        <div class="image-card" onclick="openModal('Fotos/IMG-20220115-WA0002.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20220115-WA0002.jpg" alt="IMG-20220115-WA0002.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20220115-WA0002.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG-20220224-WA0006.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20220224-WA0006.jpg" alt="IMG-20220224-WA0006.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20220224-WA0006.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG-20220417-WA0005.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20220417-WA0005.jpg" alt="IMG-20220417-WA0005.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20220417-WA0005.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG-20220425-WA0017.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20220425-WA0017.jpg" alt="IMG-20220425-WA0017.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20220425-WA0017.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG-20220605-WA0002.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20220605-WA0002.jpg" alt="IMG-20220605-WA0002.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20220605-WA0002.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG-20231022-WA0002.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20231022-WA0002.jpg" alt="IMG-20231022-WA0002.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20231022-WA0002.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG-20231116-WA0022.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20231116-WA0022.jpg" alt="IMG-20231116-WA0022.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20231116-WA0022.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG-20231117-WA0042.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20231117-WA0042.jpg" alt="IMG-20231117-WA0042.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20231117-WA0042.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG-20240806-WA0020.jpg')">
+            <div class="image-container"><img src="Fotos/IMG-20240806-WA0020.jpg" alt="IMG-20240806-WA0020.jpg" loading="lazy"></div>
+            <div class="image-name">IMG-20240806-WA0020.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG_20220605_175647118.jpg')">
+            <div class="image-container"><img src="Fotos/IMG_20220605_175647118.jpg" alt="IMG_20220605_175647118.jpg" loading="lazy"></div>
+            <div class="image-name">IMG_20220605_175647118.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG_20220817_161125011.jpg')">
+            <div class="image-container"><img src="Fotos/IMG_20220817_161125011.jpg" alt="IMG_20220817_161125011.jpg" loading="lazy"></div>
+            <div class="image-name">IMG_20220817_161125011.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG_20220827_212634115.jpg')">
+            <div class="image-container"><img src="Fotos/IMG_20220827_212634115.jpg" alt="IMG_20220827_212634115.jpg" loading="lazy"></div>
+            <div class="image-name">IMG_20220827_212634115.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG_20221221_195136945_BURST000_COVER_TOP.jpg')">
+            <div class="image-container"><img src="Fotos/IMG_20221221_195136945_BURST000_COVER_TOP.jpg" alt="IMG_20221221_195136945_BURST000_COVER_TOP.jpg" loading="lazy"></div>
+            <div class="image-name">IMG_20221221_195136945_BURST000_COVER_TOP.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG_20240617_172915085.jpg')">
+            <div class="image-container"><img src="Fotos/IMG_20240617_172915085.jpg" alt="IMG_20240617_172915085.jpg" loading="lazy"></div>
+            <div class="image-name">IMG_20240617_172915085.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG_20240617_175241689.jpg')">
+            <div class="image-container"><img src="Fotos/IMG_20240617_175241689.jpg" alt="IMG_20240617_175241689.jpg" loading="lazy"></div>
+            <div class="image-name">IMG_20240617_175241689.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG_20240921_191510548.jpg')">
+            <div class="image-container"><img src="Fotos/IMG_20240921_191510548.jpg" alt="IMG_20240921_191510548.jpg" loading="lazy"></div>
+            <div class="image-name">IMG_20240921_191510548.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/IMG_20240921_210749812.jpg')">
+            <div class="image-container"><img src="Fotos/IMG_20240921_210749812.jpg" alt="IMG_20240921_210749812.jpg" loading="lazy"></div>
+            <div class="image-name">IMG_20240921_210749812.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2024-11-16 a las 20.59.57_17fddce5.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2024-11-16 a las 20.59.57_17fddce5.jpg" alt="Imagen de WhatsApp 2024-11-16 a las 20.59.57_17fddce5.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2024-11-16 a las 20.59.57_17fddce5.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.02_b8df1804.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.02_b8df1804.jpg" alt="Imagen de WhatsApp 2025-11-24 a las 15.00.02_b8df1804.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-11-24 a las 15.00.02_b8df1804.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.02_c8ad3d73.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.02_c8ad3d73.jpg" alt="Imagen de WhatsApp 2025-11-24 a las 15.00.02_c8ad3d73.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-11-24 a las 15.00.02_c8ad3d73.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.02_f36bc5f2.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.02_f36bc5f2.jpg" alt="Imagen de WhatsApp 2025-11-24 a las 15.00.02_f36bc5f2.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-11-24 a las 15.00.02_f36bc5f2.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.03_29062a1b.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.03_29062a1b.jpg" alt="Imagen de WhatsApp 2025-11-24 a las 15.00.03_29062a1b.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-11-24 a las 15.00.03_29062a1b.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.03_71f0c3bf.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.03_71f0c3bf.jpg" alt="Imagen de WhatsApp 2025-11-24 a las 15.00.03_71f0c3bf.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-11-24 a las 15.00.03_71f0c3bf.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.03_84cf9689.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.03_84cf9689.jpg" alt="Imagen de WhatsApp 2025-11-24 a las 15.00.03_84cf9689.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-11-24 a las 15.00.03_84cf9689.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.04_ade77a7c.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.04_ade77a7c.jpg" alt="Imagen de WhatsApp 2025-11-24 a las 15.00.04_ade77a7c.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-11-24 a las 15.00.04_ade77a7c.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.04_d5123f05.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-11-24 a las 15.00.04_d5123f05.jpg" alt="Imagen de WhatsApp 2025-11-24 a las 15.00.04_d5123f05.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-11-24 a las 15.00.04_d5123f05.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 14.37.26_f19584c2.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 14.37.26_f19584c2.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 14.37.26_f19584c2.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 14.37.26_f19584c2.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 14.38.10_627db0fd.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 14.38.10_627db0fd.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 14.38.10_627db0fd.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 14.38.10_627db0fd.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 14.38.44_86385a50.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 14.38.44_86385a50.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 14.38.44_86385a50.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 14.38.44_86385a50.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 14.39.05_74754d2e.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 14.39.05_74754d2e.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 14.39.05_74754d2e.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 14.39.05_74754d2e.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 14.42.05_b0aae8ce.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 14.42.05_b0aae8ce.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 14.42.05_b0aae8ce.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 14.42.05_b0aae8ce.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 14.42.35_18d1e31c.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 14.42.35_18d1e31c.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 14.42.35_18d1e31c.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 14.42.35_18d1e31c.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 14.50.16_9fb46ce2.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 14.50.16_9fb46ce2.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 14.50.16_9fb46ce2.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 14.50.16_9fb46ce2.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 14.52.35_a43630b7.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 14.52.35_a43630b7.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 14.52.35_a43630b7.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 14.52.35_a43630b7.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 15.28.08_d2fda31f.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 15.28.08_d2fda31f.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 15.28.08_d2fda31f.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 15.28.08_d2fda31f.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Imagen de WhatsApp 2025-12-08 a las 15.28.09_48e07ede.jpg')">
+            <div class="image-container"><img src="Fotos/Imagen de WhatsApp 2025-12-08 a las 15.28.09_48e07ede.jpg" alt="Imagen de WhatsApp 2025-12-08 a las 15.28.09_48e07ede.jpg" loading="lazy"></div>
+            <div class="image-name">Imagen de WhatsApp 2025-12-08 a las 15.28.09_48e07ede.jpg</div>
+        </div>
+        <div class="image-card" onclick="openModal('Fotos/Layer 1.jpg')">
+            <div class="image-container"><img src="Fotos/Layer 1.jpg" alt="Layer 1.jpg" loading="lazy"></div>
+            <div class="image-name">Layer 1.jpg</div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        function openModal(imageSrc) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            modal.style.display = "flex";
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
